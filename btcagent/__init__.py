@@ -140,3 +140,10 @@ def optimize_agent(
                 max_epsv,
             )
     return [max_wallet_value, max_wc, max_wv, max_epsc, max_epsv]
+
+
+def get_target_prices(prices, wc, wv, epsc, epsv):
+    mean_price = np.mean(prices[len(prices) - int(wc) : len(prices)])
+    buy_price = mean_price * (1 - epsc)
+    sell_price = mean_price * (1 + epsv)
+    return buy_price, sell_price
