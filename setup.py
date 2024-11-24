@@ -18,7 +18,7 @@ class wheel(bdist_wheel):
 
 setup(
     name="btcagent",
-    version="0.0.6",
+    version="0.0.8",
     packages=find_packages(),
     description="BTC Agent",
     author="Péricles Lopes Machado",

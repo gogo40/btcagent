@@ -64,10 +64,10 @@ def bitcoin_agent(prices, wc, wv, epsc, epsv, USDTo, BTCo):
     mean_pricev = np.mean(prices[0:wv])
     Pc = (1 - epsc) * mean_pricec
     Pv = (1 + epsv) * mean_pricev
-    for t_global in range(wc, N):
+    for t_global in range(max(wc, wv), N):
         current_price = prices[t_global]
         mean_pricec = np.mean(prices[t_global - wc : t_global])
-        mean_pricev =np.mean(prices[t_global - wv : t_global])
+        mean_pricev = np.mean(prices[t_global - wv : t_global])
         if t_global >= Tc + wc:
             Pc = (1 - epsc) * mean_pricec
         if t_global >= Tv + wv:
@@ -145,7 +145,8 @@ def optimize_agent(
 
 
 def get_target_prices(prices, wc, wv, epsc, epsv):
-    mean_price = np.mean(prices[len(prices) - int(wc) : len(prices)])
-    buy_price = mean_price * (1 - epsc)
-    sell_price = mean_price * (1 + epsv)
+    mean_pricec = np.mean(prices[len(prices) - int(wc) : len(prices)])
+    mean_pricev = np.mean(prices[len(prices) - int(wv) : len(prices)])
+    buy_price = mean_pricec * (1 - epsc)
+    sell_price = mean_pricev * (1 + epsv)
     return buy_price, sell_price
