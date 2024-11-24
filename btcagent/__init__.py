@@ -68,7 +68,7 @@ def bitcoin_agent(prices, wc, wv, epsc, epsv, USDTo, BTCo):
         mean_price = np.mean(prices[t_global - wc : t_global])
         if t_global >= Tc + wc:
             Pc = (1 - epsc) * mean_price
-        if t_global >= Tv + wc:
+        if t_global >= Tv + wv:
             Pv = (1 + epsv) * mean_price
 
         if USDT > 0:
